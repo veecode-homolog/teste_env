@@ -1,0 +1,14 @@
+global:
+  domain: vee.codes 
+  ingressClassName: nginx
+  secure: true
+  provider: aws
+cert-manager:
+  email: ${{ parameters.reuseResource | parseJSON | pick('cert_manager_email')}} 
+  issuer:
+    type: "${{ parameters.reuseResource | parseJSON | pick('cert_manager_issuer_type')}}"
+    solver: "DNS01"
+external-dns:
+  enabled: true
+nginx:
+  enabled: false
